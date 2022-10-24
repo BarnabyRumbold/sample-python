@@ -10,12 +10,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         msg = 'hello world' % (self.path)
         self.wfile.write(msg.encode())
 
+from flask import Flask
+app = Flask(__name__)
 
-try:
-    print ('hiya')
-except:
-    print("woops")
+@app.route("/")
+def home():
+    return "this is the home page"
 
+if __name__ == '__main__':
+    app.run(debug=True, port=8000)
 
 port = int(os.getenv('PORT', 80))
 print('Listening on port %s' % (port))
